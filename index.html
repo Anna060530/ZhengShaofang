@@ -46,7 +46,6 @@ nav {
   display: flex; align-items: flex-end;
   position: relative; overflow: hidden;
 }
-/* CSS木紋背景 fallback，圖片載入後覆蓋 */
 .hero-bg {
   position: absolute; inset: 0;
   background:
@@ -103,7 +102,7 @@ nav {
 }
 .stat-num { font-family: 'Noto Serif TC', serif; font-size: 2.8rem; font-weight: 900; color: var(--gold); line-height: 1; }
 .stat-suf { font-size: 1.4rem; color: var(--accent); }
-.stat-label { font-size: 0.7rem; letter-spacing: 0.2em; color: rgba(242,232,216,0.45); margin-top: 6px; }
+.stat-label { font-size: 0.7Baserem; letter-spacing: 0.2em; color: rgba(242,232,216,0.45); margin-top: 6px; }
 
 /* ─── MARQUEE ─── */
 .marquee-wrap { background: var(--accent); overflow: hidden; padding: 14px 0; }
@@ -128,7 +127,7 @@ nav {
 
 /* ─── SERVICES ─── */
 .services { padding: 120px 80px; background: var(--bg); }
-.svc-intro { margin-bottom: 72px; max-width: 580px; }
+.svc-intro margin-bottom: 72px; max-width: 580px; }
 .svc-sub { font-size: 0.9rem; line-height: 1.95; color: var(--muted); margin-top: 22px; }
 .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
 .svc-card {
@@ -137,14 +136,12 @@ nav {
   cursor: default; transition: transform 0.35s;
 }
 .svc-card:hover { transform: translateY(-6px); z-index: 2; }
-.svc-img-wrap { position: relative; height: 270px; overflow: hidden; }
+.svc-img-wrap { position: relative; height: 270px; overflow: hidden; background: var(--mid); }
 .svc-img-wrap img {
   width: 100%; height: 100%; object-fit: cover; display: block;
   filter: brightness(0.72) saturate(0.75);
   transition: filter 0.4s, transform 0.5s;
 }
-/* CSS背景 fallback for when images don't load */
-.svc-img-wrap { background: var(--mid); }
 .svc-card:hover .svc-img-wrap img { filter: brightness(0.9) saturate(1); transform: scale(1.06); }
 .svc-body { padding: 36px 32px 44px; }
 .svc-num { font-size: 0.65rem; letter-spacing: 0.32em; color: var(--accent); margin-bottom: 14px; }
@@ -155,10 +152,7 @@ nav {
 
 /* ─── FEATURE ─── */
 .feature { display: grid; grid-template-columns: 1fr 1fr; min-height: 560px; }
-.feat-img {
-  position: relative; overflow: hidden;
-  background: var(--mid);
-}
+.feat-img { position: relative; overflow: hidden; background: var(--mid); }
 .feat-img img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.8) saturate(0.8); display: block; transition: transform 8s ease; }
 .feat-img:hover img { transform: scale(1.06); }
 .feat-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent 50%, rgba(12,9,4,0.9) 100%); }
@@ -188,9 +182,7 @@ nav {
 .gi:hover .gi-ov { opacity: 1; }
 
 /* ─── FLOW ─── */
-.flow {
-  padding: 120px 80px; background: var(--mid); position: relative; overflow: hidden;
-}
+.flow { padding: 120px 80px; background: var(--mid); position: relative; overflow: hidden; }
 .flow::before {
   content: '';
   position: absolute; inset: 0;
@@ -264,6 +256,7 @@ textarea.field { min-height: 136px; resize: vertical; }
   letter-spacing: 0.22em; transition: background 0.2s, transform 0.2s;
 }
 .form-submit:hover { background: var(--accent2); transform: translateY(-2px); }
+.form-submit:disabled { background: var(--muted); opacity: 0.6; cursor: not-allowed; transform: none; }
 
 /* ─── FOOTER ─── */
 footer {
@@ -276,6 +269,30 @@ footer {
 .footer-links a { font-size: 0.75rem; letter-spacing: 0.16em; color: rgba(242,232,216,0.32); text-decoration: none; transition: color 0.2s; }
 .footer-links a:hover { color: var(--gold); }
 .footer-copy { font-size: 0.72rem; color: rgba(242,232,216,0.2); }
+
+/* ─── MODAL彈出視窗 ─── */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(6, 4, 2, 0.75);
+  backdrop-filter: blur(8px); z-index: 999;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+}
+.modal-overlay.active { opacity: 1; pointer-events: auto; }
+.modal-box {
+  background: var(--dark); border: 1px solid var(--gold);
+  padding: 40px; max-width: 420px; width: 90%; text-align: center;
+  border-radius: 4px; box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+  transform: scale(0.9); transition: transform 0.3s ease;
+}
+.modal-overlay.active .modal-box { transform: scale(1); }
+.modal-icon { width: 48px; height: 48px; margin: 0 auto 20px; stroke: var(--gold); }
+.modal-title { font-family: 'Noto Serif TC', serif; font-size: 1.4rem; color: var(--cream); margin-bottom: 12px; font-weight: 600; }
+.modal-msg { font-size: 0.88rem; color: var(--muted); line-height: 1.8; margin-bottom: 28px; }
+.modal-btn {
+  padding: 12px 36px; background: var(--accent); color: #fff; border: none;
+  font-size: 0.82rem; letter-spacing: 0.15em; border-radius: 2px; cursor: pointer; transition: background 0.2s;
+}
+.modal-btn:hover { background: var(--accent2); }
 
 /* ─── SCROLL REVEAL ─── */
 .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
@@ -516,8 +533,8 @@ footer {
   </div>
   <div class="reveal" style="transition-delay: 0.15s">
     <div class="form-wrap">
-      <!-- 表單已完美串接您的 Google Apps Script 後端網址 -->
-      <form action="https://script.google.com/macros/s/AKfycbzhhX6uolY3gV1mUy5hX5_mzQ0_uvP9FZiOvH-8irBiBlOeikOlxxw2MAQhJqETv5DxJw/exec" method="POST" style="width: 100%; display: flex; flex-direction: column; gap: 14px;">
+      <!-- 移除原本的 action 轉向，改由下方 JS 非同步傳送 -->
+      <form id="woodworkingForm" style="width: 100%; display: flex; flex-direction: column; gap: 14px;">
         
         <div class="form-row">
           <input class="field" type="text" name="name" placeholder="您的姓名 *" required>
@@ -530,12 +547,25 @@ footer {
         
         <textarea class="field" name="requirement" placeholder="描述您的需求（材料、尺寸、造型等）" required></textarea>
         
-        <button type="submit" class="form-submit">送出諮詢</button>
+        <button type="submit" id="submitBtn" class="form-submit">送出諮詢</button>
         
       </form>
     </div>
   </div>
 </section>
+
+<!-- MODAL彈出提示視窗結構 -->
+<div id="successModal" class="modal-overlay">
+  <div class="modal-box">
+    <svg class="modal-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+      <polyline points="22 4 12 14.01 9 11.01"/>
+    </svg>
+    <div class="modal-title">資料送出成功！</div>
+    <div class="modal-msg">感謝您的洽詢，我們已收到您的木作需求。專員將會盡快與您聯絡，您也可以點擊上方「加 LINE 聊聊」加速討論！</div>
+    <button type="button" id="modalCloseBtn" class="modal-btn">確認</button>
+  </div>
+</div>
 
 <footer>
   <div class="footer-brand">新繹數位木作 × 台灣秀</div>
@@ -549,7 +579,7 @@ footer {
 </footer>
 
 <script>
-// Scroll reveal — 確保初始狀態正確
+// Scroll reveal — 滾動動態
 (function() {
   const obs = new IntersectionObserver(
     entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }),
@@ -557,6 +587,49 @@ footer {
   );
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 })();
+
+// 表單非同步處理與彈出視窗 JS
+const form = document.getElementById('woodworkingForm');
+const submitBtn = document.getElementById('submitBtn');
+const modal = document.getElementById('successModal');
+const modalCloseBtn = document.getElementById('modalCloseBtn');
+const scriptURL = 'https://script.google.com/macros/s/AKfycbzhhX6uolY3gV1mUy5hX5_mzQ0_uvP9FZiOvH-8irBiBlOeikOlxxw2MAQhJqETv5DxJw/exec';
+
+form.addEventListener('submit', e => {
+  e.preventDefault(); // 阻擋原本的跳轉行為
+  
+  submitBtn.disabled = true;
+  submitBtn.innerText = '傳送中...';
+
+  // 使用 Fetch API 非同步將資料丟給後端 Google Apps Script
+  fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+    .then(response => {
+      submitBtn.disabled = false;
+      submitBtn.innerText = '送出諮詢';
+      
+      // 跳出精美的成功視窗
+      modal.classList.add('active');
+      form.reset(); // 清空輸入框
+    })
+    .catch(error => {
+      console.error('Error!', error.message);
+      alert('傳送失敗，請稍後再試，或直接加 LINE 聯繫我們，謝謝！');
+      submitBtn.disabled = false;
+      submitBtn.innerText = '送出諮詢';
+    });
+});
+
+// 點擊確認按鈕關閉視窗
+modalCloseBtn.addEventListener('click', () => {
+  modal.classList.remove('active');
+});
+
+// 點擊視窗外部黑色半透明處也能關閉視窗
+modal.addEventListener('click', (e) => {
+  if (e.target === modal) {
+    modal.classList.remove('active');
+  }
+});
 </script>
 </body>
 </html>
